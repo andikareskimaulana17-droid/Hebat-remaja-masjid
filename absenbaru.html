@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi Jadwal Ramadan 1447 H</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #f0b90b;
+            padding-bottom: 15px;
+        }
+
+        .ramadan-badge {
+            background: linear-gradient(45deg, #f0b90b, #f5d742);
+            color: #1e3c72;
+            text-align: center;
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.2em;
+            box-shadow: 0 5px 15px rgba(240, 185, 11, 0.3);
+        }
+
+        .form-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5ea;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .jadwal-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .jadwal-title {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .jadwal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .jadwal-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #f0b90b;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .jadwal-card h4 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .jadwal-card p {
+            color: #666;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .jadwal-card i {
+            color: #f0b90b;
+        }
+
+        .absen-list {
+            margin-top: 30px;
+        }
+
+        .absen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .absen-header h3 {
+            color: #1e3c72;
+        }
+
+        .absen-count {
+            background: #f0b90b;
+            color: #1e3c72;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e1e5ea;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .status-hadir {
+            background: #d4edda;
+            color: #155724;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .status-izin {
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .status-sakit {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .filter-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .filter-container select {
+            width: auto;
+            flex: 1;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .jadwal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌙 Absensi Ramadan 1447 H</h1>
+        
+        <div class="ramadan-badge">
+            🌟 Ramadan Mubarak - 30 Hari Penuh Berkah (Februari 2026) 🌟
+        </div>
+
+        <!-- Jadwal Ramadan -->
+        <div class="jadwal-container">
+            <div class="jadwal-title">
+                <h3>📅 Jadwal Ibadah Ramadan 1447 H (Februari 2026)</h3>
+            </div>
+            <div class="jadwal-grid" id="jadwalGrid">
+                <!-- Jadwal akan diisi dengan JavaScript -->
+            </div>
+        </div>
+
+        <!-- Form Absensi -->
+        <div class="form-container">
+            <h3 style="color: #1e3c72; margin-bottom: 20px;">📝 Form Absensi Harian</h3>
+            <form id="absenForm">
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tanggal">Tanggal Ramadan (Hari ke-)</label>
+                    <select id="tanggal" required>
+                        <!-- Options akan diisi dengan JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Keterangan</label>
+                    <select id="status" required>
+                        <option value="">Pilih Keterangan</option>
+                        <option value="Hadir">✅ Hadir</option>
+                        <option value="Izin">📝 Izin</option>
+                        <option value="Sakit">🤒 Sakit</option>
+                        <option value="Libur">🏖️ Libur</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catatan">Catatan Tambahan (Opsional)</label>
+                    <textarea id="catatan" rows="3" placeholder="Tambahkan catatan jika perlu..."></textarea>
+                </div>
+                
+                <button type="submit">📋 Simpan Absensi</button>
+            </form>
+        </div>
+
+        <!-- Filter dan Daftar Absensi -->
+        <div class="absen-list">
+            <div class="absen-header">
+                <h3>📋 Daftar Absensi</h3>
+                <span class="absen-count" id="totalAbsen">0</span>
+            </div>
+            
+            <div class="filter-container">
+                <select id="filterTanggal">
+                    <option value="all">Semua Tanggal</option>
+                </select>
+                <select id="filterStatus">
+                    <option value="all">Semua Status</option>
+                    <option value="Hadir">✅ Hadir</option>
+                    <option value="Izin">📝 Izin</option>
+                    <option value="Sakit">🤒 Sakit</option>
+                    <option value="Libur">🏖️ Libur</option>
+                </select>
+                <button onclick="resetFilters()" style="padding: 10px; background: #6c757d;">Reset Filter</button>
+            </div>
+
+            <table id="absenTable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Hari ke-</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Catatan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="absenBody">
+                    <tr>
+                        <td colspan="7" class="empty-message">
+                            Belum ada data absensi. Silakan isi form di atas.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        // Data absensi (disimpan di localStorage)
+        let dataAbsensi = JSON.parse(localStorage.getItem('absensiRamadan1447')) || [];
+
+        // Inisialisasi halaman
+        document.addEventListener('DOMContentLoaded', function() {
+            tampilkanJadwal();
+            buatOptionTanggal();
+            buatFilterTanggal();
+            tampilkanAbsensi();
+            
+            // Event listener untuk form
+            document.getElementById('absenForm').addEventListener('submit', tambahAbsensi);
+            
+            // Event listener untuk filter
+            document.getElementById('filterTanggal').addEventListener('change', filterAbsensi);
+            document.getElementById('filterStatus').addEventListener('change', filterAbsensi);
+        });
+
+        // Fungsi untuk menampilkan jadwal
+        function tampilkanJadwal() {
+            const jadwalGrid = document.getElementById('jadwalGrid');
+            jadwalGrid.innerHTML = '';
+            
+            jadwalRamadan.slice(0, 5).forEach(jadwal => {
+                const card = document.createElement('div');
+                card.className = 'jadwal-card';
+                card.innerHTML = `
+                    <h4>🌙 Hari ke-${jadwal.hari}</h4>
+                    <p>📅 ${jadwal.tanggal}</p>
+                    <p>⏰ Imsak: ${jadwal.imsak}</p>
+                    <p>🕋 Subuh: ${jadwal.subuh}</p>
+                    <p>🌅 Maghrib: ${jadwal.maghrib}</p>
+                `;
+                jadwalGrid.appendChild(card);
+            });
+        }
+
+        // Fungsi untuk membuat option tanggal
+        function buatOptionTanggal() {
+            const selectTanggal = document.getElementById('tanggal');
+            selectTanggal.innerHTML = '<option value="">Pilih Hari ke-</option>';
+            
+            jadwalRamadan.forEach(jadwal => {
+                const option = document.createElement('option');
+                option.value = jadwal.hari;
+                option.textContent = `Hari ke-${jadwal.hari} (${jadwal.tanggal})`;
+                selectTanggal.appendChild(option);
+            });
+        }
+
+        // Fungsi untuk membuat filter tanggal
+        function buatFilterTanggal() {
+            const filterTanggal = document.getElementById('filterTanggal');
+            filterTanggal.innerHTML = '<option value="all">Semua Tanggal</option>';
+            
+            jadwalRamadan.forEach(jadwal => {
+                const option = document.createElement('option');
+                option.value = jadwal.hari;
+                option.textContent = `Hari ke-${jadwal.hari}`;
+                filterTanggal.appendChild(option);
+            });
+        }
+
+        // Fungsi untuk menambah absensi
+        function tambahAbsensi(e) {
+            e.preventDefault();
+            
+            const nama = document.getElementById('nama').value;
+            const hari = parseInt(document.getElementById('tanggal').value);
+            const status = document.getElementById('status').value;
+            const catatan = document.getElementById('catatan').value;
+            
+            if (!nama || !hari || !status) {
+                alert('Mohon lengkapi semua field yang wajib diisi!');
+                return;
+            }
+            
+            // Cek apakah sudah absen di hari yang sama
+            const sudahAbsen = dataAbsensi.some(item => item.nama.toLowerCase() === nama.toLowerCase() && item.hari === hari);
+            
+            if (sudahAbsen) {
+                alert('Anda sudah melakukan absensi untuk hari ini!');
+                return;
+            }
+            
+            const jadwal = jadwalRamadan.find(j => j.hari === hari);
+            
+            const absenBaru = {
+                id: Date.now(),
+                nama: nama,
+                hari: hari,
+                tanggal: jadwal.tanggal,
+                status: status,
+                catatan: catatan || '-'
+            };
+            
+            dataAbsensi.push(absenBaru);
+            localStorage.setItem('absensiRamadan1447', JSON.stringify(dataAbsensi));
+            
+            // Reset form
+            document.getElementById('absenForm').reset();
+            
+            // Tampilkan data terbaru
+            tampilkanAbsensi();
+            
+            alert('Absensi berhasil disimpan!');
+        }
+
+        // Fungsi untuk menampilkan absensi
+        function tampilkanAbsensi() {
+            const tbody = document.getElementById('absenBody');
+            const filterTanggal = document.getElementById('filterTanggal').value;
+            const filterStatus = document.getElementById('filterStatus').value;
+            
+            let dataTampil = dataAbsensi;
+            
+            // Filter berdasarkan tanggal
+            if (filterTanggal !== 'all') {
+                dataTampil = dataTampil.filter(item => item.hari === parseInt(filterTanggal));
+            }
+            
+            // Filter berdasarkan status
+            if (filterStatus !== 'all') {
+                dataTampil = dataTampil.filter(item => item.status === filterStatus);
+            }
+            
+            // Update total absen
+            document.getElementById('totalAbsen').textContent = dataTampil.length;
+            
+            if (dataTampil.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty-message">
+                            Tidak ada data absensi yang sesuai dengan filter.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = '';
+            dataTampil.sort((a, b) => b.id - a.id).forEach((item, index) => {
+                const row = document.createElement('tr');
+                
+                let statusClass = '';
+                switch(item.status) {
+                    case 'Hadir':
+                        statusClass = 'status-hadir';
+                        break;
+                    case 'Izin':
+                        statusClass = 'status-izin';
+                        break;
+                    case 'Sakit':
+                        statusClass = 'status-sakit';
+                        break;
+                    default:
+                        statusClass = '';
+                }
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><strong>${item.nama}</strong></td>
+                    <td>Hari ke-${item.hari}</td>
+                    <td>${item.tanggal}</td>
+                    <td><span class="${statusClass}">${item.status}</span></td>
+                    <td>${item.catatan}</td>
+                    <td>
+                        <button class="delete-btn" onclick="hapusAbsensi(${item.id})" title="Hapus data ini">Hapus</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Fungsi untuk filter absensi
+        function filterAbsensi() {
+            tampilkanAbsensi();
+        }
+
+        // Fungsi untuk reset filter
+        function resetFilters() {
+            document.getElementById('filterTanggal').value = 'all';
+            document.getElementById('filterStatus').value = 'all';
+            tampilkanAbsensi();
+        }
+
+        // Fungsi untuk menghapus absensi
+        function hapusAbsensi(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                dataAbsensi = dataAbsensi.filter(item => item.id !== id);
+                localStorage.setItem('absensiRamadan1447', JSON.stringify(dataAbsensi));
+                tampilkanAbsensi();
+                alert('Data berhasil dihapus!');
+            }
+        }
+    </script>
+</body>
+</html>
